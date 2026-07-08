@@ -12,8 +12,8 @@
 
   gtag('config', 'G-V2SP3QFGMH');
 </script>
-    <title>Master Unit Converter | Tüm Birimleri Hızla Çevirin</title>
-    <meta name="description" content="Uzunluk, ağırlık, döviz, kripto, mutfak ölçüleri ve 20'den fazla kategoride ücretsiz, canlı ve ultra hızlı birim çevirici.">
+    <title>Birimbaz | Tüm Birimleri Hızla Çevirin</title>
+    <meta name="description" content="Uzunluk, ağırlık, döviz, kripto, mutfak ölçüleri ve 30'dan fazla kategoride ücretsiz, canlı ve ultra hızlı birim çevirici.">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -62,7 +62,7 @@
         <aside :class="['fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 overflow-y-auto transform transition-transform duration-300 lg:relative lg:translate-x-0', sidebarOpen ? 'translate-x-0' : '-translate-x-full']">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-8">
-                    <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">MasterConv</h1>
+                    <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Birimbaz</h1>
                     <button @click="sidebarOpen = false" class="lg:hidden text-slate-500 hover:text-slate-800 dark:hover:text-white">
                         <i data-lucide="x"></i>
                     </button>
@@ -205,7 +205,7 @@
             </article>
 
             <footer class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center text-slate-500 text-sm pb-8">
-                &copy; 2026 Master Unit Converter. Tüm hakları saklıdır.
+                &copy; 2026 Birimbaz. Tüm hakları saklıdır.
             </footer>
 
         </div>
@@ -219,21 +219,22 @@
         // --- KATEGORİ: GENEL ---
         {
             id: 'uzunluk', name: 'Uzunluk', category: 'Genel', icon: 'ruler',
-            seo: { title: 'Uzunluk Birim Çevirici', description: 'Metre, kilometre, mil, inç gibi uzunluk birimlerini anında çevirin.', content: '<p>Uzunluk birimleri arasındaki dönüşüm, uluslararası standartlara (SI) dayanır. Temel birim <strong>Metre (m)</strong> dir.</p>' },
+            seo: { title: 'Uzunluk Birim Çevirici | Birimbaz', description: 'Metre, kilometre, mil, inç gibi uzunluk birimlerini anında çevirin.', content: '<p>Uzunluk birimleri arasındaki dönüşüm, uluslararası standartlara (SI) dayanır. Temel birim <strong>Metre (m)</strong> dir.</p>' },
             units: { 'm': 1, 'km': 1000, 'cm': 0.01, 'mm': 0.001, 'in': 0.0254, 'ft': 0.3048, 'yd': 0.9144, 'mi': 1609.344 },
             faq: [ { q: '1 Mil kaç kilometredir?', a: '1 kara mili 1.609 kilometredir.' }, { q: '1 İnç kaç santimetredir?', a: '1 inç 2.54 santimetredir.' } ]
         },
         {
             id: 'agirlik', name: 'Ağırlık / Kütle', category: 'Genel', icon: 'weight',
-            seo: { title: 'Ağırlık Çevirici | kg, gr, lb', description: 'Kilogram, gram, libre, ons kütle birimlerini hesaplayın.', content: '<p>Kütlenin temel SI birimi Kilogram (kg) olsa da, dönüşümlerde Gram (g) çok yaygındır.</p>' },
+            seo: { title: 'Ağırlık Çevirici | kg, gr, lb | Birimbaz', description: 'Kilogram, gram, libre, ons kütle birimlerini hesaplayın.', content: '<p>Kütlenin temel SI birimi Kilogram (kg) olsa da, dönüşümlerde Gram (g) çok yaygındır.</p>' },
             units: { 'g': 1, 'kg': 1000, 'mg': 0.001, 'ton': 1000000, 'lb': 453.59237, 'oz': 28.34952 },
             faq: [ { q: '1 Pound (lb) kaç kilogramdır?', a: '1 Pound (lb) yaklaşık 0.453 kilogramdır.' } ]
         },
         {
             id: 'sicaklik', name: 'Sıcaklık', category: 'Genel', icon: 'thermometer',
-            seo: { title: 'Sıcaklık Çevirici | C, F, K', description: 'Celsius, Fahrenheit, Kelvin sıcaklıklarını dönüştürün.', content: '<p>Sıcaklık dönüşümleri birim oranından ziyade ofset (kayma) formülleri kullanır.</p>' },
+            seo: { title: 'Sıcaklık Çevirici | C, F, K | Birimbaz', description: 'Celsius, Fahrenheit, Kelvin sıcaklıklarını dönüştürün.', content: '<p>Sıcaklık dönüşümleri birim oranından ziyade ofset (kayma) formülleri kullanır.</p>' },
             units: { 'C': 'Celsius', 'F': 'Fahrenheit', 'K': 'Kelvin' },
             customConvert: function(val, from, to) {
+                if (from === to) return val;
                 let c = from === 'C' ? val : (from === 'F' ? (val - 32) * 5/9 : val - 273.15);
                 return to === 'C' ? c : (to === 'F' ? (c * 9/5) + 32 : c + 273.15);
             },
@@ -243,107 +244,167 @@
         // --- KATEGORİ: FİNANS ---
         {
             id: 'doviz', name: 'Döviz (Canlı)', category: 'Finans', icon: 'banknote',
-            seo: { title: 'Canlı Döviz Çevirici', description: 'Canlı piyasa verileriyle döviz kurlarını hesaplayın.', content: '<p>Döviz kurları anlık olarak değişir. API aracılığıyla en güncel kapanış oranları çekilir.</p>' },
+            seo: { title: 'Canlı Döviz Çevirici | Birimbaz', description: 'Canlı piyasa verileriyle döviz kurlarını hesaplayın.', content: '<p>Döviz kurları anlık olarak değişir. API aracılığıyla en yüksek limitli ve kararlı uluslararası kapanış oranları çekilir.</p>' },
             units: { 'USD': 1, 'EUR': 0.92, 'TRY': 32.5, 'GBP': 0.79, 'JPY': 150.0 }, isApi: 'currency',
             faq: [ { q: 'Kurlar nasıl güncellenir?', a: 'Açık API servislerinden her ziyaretinizde taze veri çekilir.' } ]
         },
         {
-            id: 'kripto', name: 'Kripto Para', category: 'Finans', icon: 'bitcoin',
-            seo: { title: 'Canlı Kripto Çevirici', description: 'BTC, ETH gibi kripto paraların USD karşılığını görün.', content: '<p>Kripto para piyasası 7/24 açıktır. CoinGecko üzerinden canlı çekilir.</p>' },
+            id: 'kripto', name: 'Kripto Para (Canlı)', category: 'Finans', icon: 'bitcoin',
+            seo: { title: 'Canlı Kripto Çevirici | Birimbaz', description: 'BTC, ETH gibi kripto paraların USD karşılığını canlı görün.', content: '<p>Kripto para piyasası 7/24 açıktır. CoinCap altyapısı üzerinden yüksek kararlılıkla canlı kurlar çekilmektedir.</p>' },
             units: { 'USD': 1, 'BTC': 0.000015, 'ETH': 0.00028, 'USDT': 1, 'BNB': 0.0016, 'SOL': 0.005 }, isApi: 'crypto',
-            faq: [ { q: 'Bitcoin fiyatı neye göre belirlenir?', a: 'Borsalardaki arz-talep dengesine göre anlık belirlenir.' } ]
+            faq: [ { q: 'Kripto para fiyatları nasıl belirlenir?', a: 'Borsalardaki küresel arz-talep dengesine göre anlık olarak güncellenir.' } ]
         },
 
         // --- KATEGORİ: TEKNOLOJİ ---
         {
             id: 'veri', name: 'Veri Depolama', category: 'Teknoloji', icon: 'hard-drive',
-            seo: { title: 'Veri Depolama Çevirici', description: 'MB, GB, TB veri ölçü birimlerini dönüştürün.', content: '<p>Bilgisayar sistemlerinde veri genelde 1024 ün katları şeklinde hesaplanır.</p>' },
+            seo: { title: 'Veri Depolama Çevirici | Birimbaz', description: 'MB, GB, TB veri ölçü birimlerini dönüştürün.', content: '<p>Bilgisayar sistemlerinde veri genelde 1024 ün katları şeklinde hesaplanır.</p>' },
             units: { 'B': 1, 'KB': 1024, 'MB': 1048576, 'GB': 1073741824, 'TB': 1099511627776 }, faq: []
         },
         {
             id: 'veri_hizi', name: 'İnternet / Veri Hızı', category: 'Teknoloji', icon: 'wifi',
-            seo: { title: 'İnternet Hızı Çevirici | Mbps, MB/s', description: 'Megabit, Megabayt, Gigabit veri transfer hızlarını dönüştürün.', content: '<p>İnternet sağlayıcıları hızları genellikle Megabit (Mbps) cinsinden satar. Ancak indirirken dosyalar Megabayt (MB/s) olarak ölçülür. 1 Bayt = 8 Bit olduğu için, 100 Mbps internet saniyede maksimum 12.5 MB veri indirir.</p>' },
-            // Base = bps (Bit per second)
+            seo: { title: 'İnternet Hızı Çevirici | Mbps, MB/s | Birimbaz', description: 'Megabit, Megabayt, Gigabit veri transfer hızlarını dönüştürün.', content: '<p>İnternet sağlayıcıları hızları genellikle Megabit (Mbps) cinsinden sunar. Ancak indirme yaparken dosyalar Megabayt (MB/s) olarak ölçülür. 1 Bayt = 8 Bit olduğu için, 100 Mbps internet saniyede maksimum 12.5 MB veri indirir.</p>' },
             units: { 'bps': 1, 'Kbps': 1000, 'Mbps': 1000000, 'Gbps': 1000000000, 'Bps': 8, 'KBps': 8000, 'MBps': 8000000, 'GBps': 8000000000 },
             faq: [ { q: '100 Mbps internet saniyede kaç MB indirir?', a: '100 Megabit / 8 = Saniyede 12.5 Megabayt (MB/s) veri indirir.' } ]
         },
         {
+            id: 'tipografi', name: 'Tipografi (Yazı Boyutu)', category: 'Teknoloji', icon: 'type',
+            seo: { title: 'Yazı Boyutu Çevirici | px, pt, em | Birimbaz', description: 'Ekran pikseli, punto, em ve inç yazı tipi boyutlarını birbirine dönüştürün.', content: '<p>Dijital tasarımda ve CSS stil dosyalarında kullanılan farklı ölçeklendirme birimlerini hesaplamaya yarar.</p>' },
+            units: { 'px': 1, 'pt': 1.333333, 'em': 16, 'in': 96, 'mm': 3.779527 },
+            faq: [ { q: '1 em standart olarak kaç pikseldir?', a: 'Modern tarayıcı varsayılanlarına göre genellikle 1 em, 16 piksele (px) eşittir.' } ]
+        },
+        {
             id: 'zaman', name: 'Zaman', category: 'Teknoloji', icon: 'clock',
-            seo: { title: 'Zaman Çevirici', description: 'Saniye, dakika, saat, gün dönüştürücü.', content: '<p>Zaman birimleri standart 60 lık tabana dayanır.</p>' },
+            seo: { title: 'Zaman Çevirici | Birimbaz', description: 'Saniye, dakika, saat, gün dönüştürücü.', content: '<p>Zaman birimleri standart 60 lık tabana dayanır.</p>' },
             units: { 'ms': 0.001, 'sn': 1, 'dk': 60, 'saat': 3600, 'gun': 86400, 'hafta': 604800, 'yil': 31536000 }, faq: []
         },
         {
             id: 'frekans', name: 'Frekans', category: 'Teknoloji', icon: 'activity',
-            seo: { title: 'Frekans Çevirici', description: 'Hz, KHz, MHz çevirici.', content: '<p>Frekans saniyedeki titreşim sayısıdır.</p>' },
+            seo: { title: 'Frekans Çevirici | Birimbaz', description: 'Hz, KHz, MHz çevirici.', content: '<p>Frekans saniyedeki titreşim sayısıdır.</p>' },
             units: { 'Hz': 1, 'kHz': 1000, 'MHz': 1000000, 'GHz': 1000000000 }, faq: []
         },
 
         // --- KATEGORİ: MÜHENDİSLİK / BİLİM ---
         {
             id: 'guc', name: 'Güç', category: 'Mühendislik', icon: 'plug',
-            seo: { title: 'Güç Çevirici | Watt, HP, kW', description: 'Watt, Kilowatt ve Beygir Gücü (HP) birimlerini kolayca çevirin.', content: '<p>Güç, birim zamanda yapılan iş miktarıdır. SI sisteminde birimi Watt (W) dır. Araç motorlarında ise Beygir Gücü (HP - Horsepower) sıkça kullanılır.</p>' },
+            seo: { title: 'Güç Çevirici | Watt, HP, kW | Birimbaz', description: 'Watt, Kilowatt ve Beygir Gücü (HP) birimlerini kolayca çevirin.', content: '<p>Güç, birim zamanda yapılan iş miktarıdır. SI sisteminde birimi Watt (W) dır. Araç motorlarında ise Beygir Gücü (HP - Horsepower) sıkça kullanılır.</p>' },
             units: { 'W': 1, 'kW': 1000, 'MW': 1000000, 'hp': 745.699872 },
             faq: [ { q: '1 Beygir Gücü (HP) kaç Watt tır?', a: '1 mekanik beygir gücü tam olarak 745.7 Watt a eşittir.' } ]
         },
         {
             id: 'kuvvet', name: 'Kuvvet', category: 'Mühendislik', icon: 'dumbbell',
-            seo: { title: 'Kuvvet Çevirici | Newton, lbf', description: 'Newton, Dyne ve Pound-force kuvvet birimlerini çevirin.', content: '<p>Kuvvetin SI birimi Newton (N) dur. 1 Newton, 1 kg kütleli cisme 1 m/s² ivme kazandıran kuvvettir.</p>' },
+            seo: { title: 'Kuvvet Çevirici | Newton, lbf | Birimbaz', description: 'Newton, Dyne ve Pound-force kuvvet birimlerini çevirin.', content: '<p>Kuvvetin SI birimi Newton (N) dur. 1 Newton, 1 kg kütleli cisme 1 m/s² ivme kazandıran kuvvettir.</p>' },
             units: { 'N': 1, 'kN': 1000, 'dyn': 0.00001, 'lbf': 4.448222 }, faq: []
         },
         {
             id: 'tork', name: 'Tork', category: 'Mühendislik', icon: 'wrench',
-            seo: { title: 'Tork Çevirici | Nm, lbf·ft', description: 'Newton-metre ve Pound-foot tork birimlerini birbirine dönüştürün.', content: '<p>Tork (veya moment), kuvvetin dönme etkisidir. Motor performans verilerinde sıkça Newton-metre (Nm) kullanılır.</p>' },
+            seo: { title: 'Tork Çevirici | Nm, lbf·ft | Birimbaz', description: 'Newton-metre ve Pound-foot tork birimlerini birbirine dönüştürün.', content: '<p>Tork (veya moment), kuvvetin dönme etkisidir. Motor performans verilerinde sıkça Newton-metre (Nm) kullanılır.</p>' },
             units: { 'Nm': 1, 'lbf_ft': 1.355818, 'kgf_m': 9.80665 }, faq: []
         },
         {
             id: 'enerji', name: 'Enerji', category: 'Mühendislik', icon: 'zap',
-            seo: { title: 'Enerji Çevirici', description: 'Joule, Kalori, kWh çevirici.', content: '<p>Temel enerji birimi Joule dür.</p>' },
+            seo: { title: 'Enerji Çevirici | Birimbaz', description: 'Joule, Kalori, kWh çevirici.', content: '<p>Temel enerji birimi Joule dür.</p>' },
             units: { 'J': 1, 'kJ': 1000, 'cal': 4.184, 'kcal': 4184, 'Wh': 3600, 'kWh': 3600000 }, faq: []
         },
         {
             id: 'basinc', name: 'Basınç', category: 'Mühendislik', icon: 'gauge',
-            seo: { title: 'Basınç Çevirici', description: 'Bar, Pascal, PSI çevirici.', content: '<p>Birim alana düşen kuvvettir.</p>' },
+            seo: { title: 'Basınç Çevirici | Birimbaz', description: 'Bar, Pascal, PSI çevirici.', content: '<p>Birim alana düşen kuvvettir.</p>' },
             units: { 'Pa': 1, 'kPa': 1000, 'bar': 100000, 'psi': 6894.76, 'atm': 101325 }, faq: []
         },
         {
             id: 'isik', name: 'Aydınlanma (Işık)', category: 'Mühendislik', icon: 'lightbulb',
-            seo: { title: 'Aydınlanma Çevirici | Lüks, Foot-candle', description: 'Lüks (lx), Foot-candle (fc) ve Phot birimlerini çevirin.', content: '<p>Aydınlanma şiddeti, bir yüzeye düşen ışık akısıdır. SI birimi Lüks (lx) tür. Kameralar ve mimari ışıklandırmalarda bu birimler esastır.</p>' },
+            seo: { title: 'Aydınlanma Çevirici | Lüks, Foot-candle | Birimbaz', description: 'Lüks (lx), Foot-candle (fc) ve Phot birimlerini çevirin.', content: '<p>Aydınlanma şiddeti, bir yüzeye düşen ışık akısıdır. SI birimi Lüks (lx) tür. Mimari ışıklandırmalarda bu birimler esastır.</p>' },
             units: { 'lx': 1, 'fc': 10.76391, 'ph': 10000 }, faq: []
         },
         {
             id: 'hiz', name: 'Hız', category: 'Mühendislik', icon: 'gauge-circle',
-            seo: { title: 'Hız Çevirici', description: 'km/s, m/s, Knot çevirici.', content: '<p>Birim zamanda alınan yoldur.</p>' },
+            seo: { title: 'Hız Çevirici | Birimbaz', description: 'km/s, m/s, Knot çevirici.', content: '<p>Birim zamanda alınan yoldur.</p>' },
             units: { 'm/s': 1, 'km/h': 0.277778, 'mph': 0.44704, 'knot': 0.514444 }, faq: []
         },
         {
             id: 'yakit', name: 'Yakıt Tüketimi', category: 'Mühendislik', icon: 'fuel',
-            seo: { title: 'Yakıt Tüketimi Çevirici', description: 'l/100km, km/l, MPG.', content: '<p>Farklı coğrafyaların tüketim metrikleri farklıdır.</p>' },
+            seo: { title: 'Yakıt Tüketimi Çevirici | Birimbaz', description: 'l/100km, km/l, MPG.', content: '<p>Farklı coğrafyaların tüketim metrikleri farklıdır.</p>' },
             units: { 'km/l': 'km/l', 'l/100km': 'l/100km', 'mpg': 'mpg' },
             customConvert: function(val, from, to) {
+                if (from === to) return val;
                 let kml = from === 'km/l' ? val : (from === 'l/100km' ? 100 / val : val * 0.425144);
                 return to === 'km/l' ? kml : (to === 'l/100km' ? 100 / kml : kml / 0.425144);
             }, faq: []
         },
         {
             id: 'alan', name: 'Alan', category: 'Mühendislik', icon: 'square',
-            seo: { title: 'Alan Çevirici', description: 'Metrekare, Dönüm, Hektar.', content: '<p>İki boyutlu yüzey ölçüsüdür.</p>' },
+            seo: { title: 'Alan Çevirici | Birimbaz', description: 'Metrekare, Dönüm, Hektar.', content: '<p>İki boyutlu yüzey ölçüsüdür.</p>' },
             units: { 'm2': 1, 'km2': 1000000, 'cm2': 0.0001, 'hektar': 10000, 'donum': 1000, 'acre': 4046.86 }, faq: []
         },
         {
             id: 'hacim', name: 'Hacim', category: 'Mühendislik', icon: 'box',
-            seo: { title: 'Hacim Çevirici', description: 'Litre, Metreküp.', content: '<p>Üç boyutlu alan kaplama ölçüsüdür.</p>' },
+            seo: { title: 'Hacim Çevirici | Birimbaz', description: 'Litre, Metreküp.', content: '<p>Üç boyutlu alan kaplama ölçüsüdür.</p>' },
             units: { 'L': 1, 'mL': 0.001, 'm3': 1000, 'galUS': 3.78541, 'galUK': 4.54609 }, faq: []
         },
         {
             id: 'aci', name: 'Açı', category: 'Mühendislik', icon: 'triangle-right',
-            seo: { title: 'Açı Çevirici', description: 'Derece, Radyan, Grad.', content: '<p>Geometrik yön belirteçleridir.</p>' },
+            seo: { title: 'Açı Çevirici | Birimbaz', description: 'Derece, Radyan, Grad.', content: '<p>Geometrik yön belirteçleridir.</p>' },
             units: { 'deg': 1, 'rad': 57.2957795, 'grad': 0.9 }, faq: []
+        },
+        {
+            id: 'yogunluk', name: 'Yoğunluk', category: 'Mühendislik', icon: 'flask',
+            seo: { title: 'Yoğunluk Çevirici | kg/m³, g/cm³ | Birimbaz', description: 'Metreküp başına kilogram, santimetreküp başına gram gibi yoğunluk birimlerini dönüştürün.', content: '<p>Yoğunluk, bir maddenin birim hacimdeki kütlesidir. Temel SI birimi kg/m³ tür.</p>' },
+            units: { 'kg_m3': 1, 'g_cm3': 1000, 'lb_ft3': 16.018463, 'lb_in3': 27679.904 },
+            faq: [ { q: 'Suyun yoğunluğu nedir?', a: 'Suyun yoğunluğu standart laboratuvar koşullarında yaklaşık 1 g/cm³ veya 1000 kg/m³ düzeyindedir.' } ]
+        },
+        {
+            id: 'radyasyon', name: 'Radyasyon Dozu', category: 'Mühendislik', icon: 'shield-alert',
+            seo: { title: 'Radyasyon Dozu Çevirici | Sievert, Gray | Birimbaz', description: 'Sievert, Gray, Rad, Rem gibi radyasyon birimlerini anında çevirin.', content: '<p>Radyasyon dozu, iyonlaştırıcı radyasyonun biyolojik dokular üzerindeki etkisini ölçer. SI birimi Sievert (Sv) dir.</p>' },
+            units: { 'Sv': 1, 'mSv': 0.001, 'uSv': 0.000001, 'rem': 0.01, 'mrem': 0.00001, 'rad': 0.01 },
+            faq: [ { q: '1 Sievert kaç milisieverttir?', a: '1 Sievert (Sv) tam olarak 1000 milisieverttir (mSv).' } ]
+        },
+        {
+            id: 'akim', name: 'Elektrik Akımı', category: 'Mühendislik', icon: 'battery-charging',
+            seo: { title: 'Elektrik Akımı Çevirici | Amper, mA | Birimbaz', description: 'Amper, miliamper ve kiloamper akım birimlerini birbirine dönüştürün.', content: '<p>Elektrik akımı, elektrik yük taşıyıcılarının akış hızıdır. SI sistemindeki temel birimi Amper (A) dir.</p>' },
+            units: { 'A': 1, 'mA': 0.001, 'uA': 0.000001, 'kA': 1000 },
+            faq: [ { q: '1 Amper kaç miliamper eder?', a: '1 Amper (A) tam olarak 1000 miliamper (mA) değerine eşittir.' } ]
+        },
+        {
+            id: 'direnc', name: 'Elektrik Direnci', category: 'Mühendislik', icon: 'activity',
+            seo: { title: 'Elektrik Direnci Çevirici | Ohm, Kiloohm | Birimbaz', description: 'Ohm, kiloohm ve megaohm direnç ölçülerini hızlıca çevirin.', content: '<p>Elektrik direnci, bir iletkenin üzerinden geçen elektrik akımına karşı gösterdiği zorluktur. Birimi Ohm dur.</p>' },
+            units: { 'ohm': 1, 'kohm': 1000, 'Mohm': 1000000, 'mohm': 0.001 },
+            faq: [ { q: 'Ohm kanunu nedir?', a: 'Gerilim = Akım x Direnç (V = I x R) formülüyle ifade edilen elektrik kanunudur.' } ]
+        },
+        {
+            id: 'akis_hizi', name: 'Hacimsel Akış Hızı', category: 'Mühendislik', icon: 'droplet',
+            seo: { title: 'Akış Hızı Çevirici | m³/s, L/dk | Birimbaz', description: 'Metreküp/saniye, litre/dakika ve galon/dakika gibi akış hızı birimlerini dönüştürün.', content: '<p>Hacimsel akış hızı, birim zamanda geçen akışkan hacmini ifade eder.</p>' },
+            units: { 'm3_s': 1, 'm3_h': 0.000277778, 'L_min': 0.0000166667, 'L_s': 0.001, 'gpm': 0.0000630902 },
+            faq: [ { q: 'gpm ne anlama gelir?', a: 'Gallons Per Minute yani dakika başına galon akışını ifade eden ABD ve İngiliz ölçü birimidir.' } ]
+        },
+        {
+            id: 'acisal_hiz', name: 'Açısal Hız', category: 'Mühendislik', icon: 'rotate-cw',
+            seo: { title: 'Açısal Hız Çevirici | RPM, rad/s | Birimbaz', description: 'Dakika başına devir (RPM), radyan/saniye ve hertz birimlerini çevirin.', content: '<p>Açısal hız, bir nesnenin bir eksen etrafında dönme hızını ifade eder.</p>' },
+            units: { 'rad_s': 1, 'deg_s': 0.0174532925, 'rpm': 0.104719755, 'Hz': 6.2831853 },
+            faq: [ { q: 'RPM ne demektir?', a: 'Revolutions Per Minute anlamına gelir ve dakikadaki dönüş sayısını belirtir.' } ]
+        },
+        {
+            id: 'ivme', name: 'İvme / Hızlanma', category: 'Mühendislik', icon: 'trending-up',
+            seo: { title: 'İvme Çevirici | m/s², G-Kuvveti | Birimbaz', description: 'Metre/saniye kare, G yerçekimi ivmesi ve feet/saniye kare birimlerini hesaplayın.', content: '<p>İvme, bir hareketlinin hızındaki birim zamandaki değişim hızıdır.</p>' },
+            units: { 'm_s2': 1, 'km_h2': 0.0000771605, 'g': 9.80665, 'ft_s2': 0.3048 },
+            faq: [ { q: '1G ivme kaç m/s² dir?', a: 'Standart yerçekimi ivmesi 1G yaklaşık 9.80665 m/s² olarak kabul edilir.' } ]
+        },
+        {
+            id: 'viskozite', name: 'Dinamik Viskozite', category: 'Mühendislik', icon: 'wind',
+            seo: { title: 'Dinamik Viskozite Çevirici | Pa·s, cP | Birimbaz', description: 'Pascal-saniye, Poise ve Centipoise akışkanlık direnci birimlerini çevirin.', content: '<p>Viskozite, akışkanların akmaya karşı gösterdiği içsel direnç ölçüsüdür.</p>' },
+            units: { 'Pa_s': 1, 'P': 0.1, 'cP': 0.001, 'lb_s_ft2': 47.880259 },
+            faq: [ { q: 'Su viskozitesi kaç cP dir?', a: '20°C de suyun dinamik viskozitesi yaklaşık olarak 1 centipoise (cP) düzeyindedir.' } ]
+        },
+        {
+            id: 'ozgul_isi', name: 'Özgül Isı Kapasitesi', category: 'Mühendislik', icon: 'flame',
+            seo: { title: 'Özgül Isı Çevirici | J/(kg·K) | Birimbaz', description: 'Joule/kilogram-Kelvin, kalori/gram-Celsius gibi özgül ısı birimlerini çevirin.', content: '<p>Özgül ısı, bir maddenin 1 gramının sıcaklığını 1°C artırmak için gereken ısı enerjisi miktarıdır.</p>' },
+            units: { 'J_kgK': 1, 'kJ_kgK': 1000, 'cal_gC': 4184, 'BTU_lbF': 4186.8 },
+            faq: [ { q: 'Suyun özgül ısısı kaçtır?', a: 'Suyun özgül ısısı oldukça yüksektir: Yaklaşık 4.184 J/(g·°C) veya 4184 J/(kg·K) dir.' } ]
         },
 
         // --- KATEGORİ: GÜNLÜK YAŞAM & SAĞLIK ---
         {
             id: 'mutfak', name: 'Mutfak Ölçüleri', category: 'Günlük Yaşam', icon: 'utensils',
-            seo: { title: 'Mutfak Ölçüleri Çevirici | Cup, Kaşık, ml', description: 'Yemek tariflerindeki Cup (Su bardağı), yemek kaşığı, çay kaşığı ve ml çevirici.', content: '<p>Özellikle Amerikan (US) yemek tariflerinde Cup ve Kaşık ölçüleri sık kullanılır. Bu araç, bu hacimleri mililitreye (ml) dönüştürmeyi sağlar.</p>' },
+            seo: { title: 'Mutfak Ölçüleri Çevirici | Cup, Kaşık, ml | Birimbaz', description: 'Yemek tariflerindeki Cup (Su bardağı), yemek kaşığı, çay kaşığı ve ml çevirici.', content: '<p>Özellikle Amerikan (US) yemek tariflerinde Cup ve Kaşık ölçüleri sık kullanılır. Bu araç, bu hacimleri mililitreye (ml) dönüştürmeyi sağlar.</p>' },
             units: { 'mL': 1, 'tsp': 4.9289, 'tbsp': 14.7868, 'cup': 236.588, 'fl_oz': 29.5735 },
             faq: [ 
                 { q: '1 Cup (Su bardağı) kaç mililitredir?', a: 'Amerikan ölçülerinde 1 Cup standart olarak yaklaşık 236.6 ml dir. Türk tipi standart su bardakları ise genelde 200 ml dir.' },
@@ -352,9 +413,49 @@
         },
         {
             id: 'kan_sekeri', name: 'Kan Şekeri', category: 'Günlük Yaşam', icon: 'droplet',
-            seo: { title: 'Kan Şekeri Çevirici | mg/dL - mmol/L', description: 'Glukoz test sonuçlarını (mg/dL ve mmol/L) anında çevirin.', content: '<p>Kan şekeri ölçümlerinde dünya genelinde iki farklı birim kullanılır: mg/dL (Türkiye ve ABD de yaygın) ve mmol/L (Avrupa nın bir kısmında yaygın).</p>' },
+            seo: { title: 'Kan Şekeri Çevirici | mg/dL - mmol/L | Birimbaz', description: 'Glukoz test sonuçlarını (mg/dL ve mmol/L) anında çevirin.', content: '<p>Kan şekeri ölçümlerinde dünya genelinde iki farklı birim kullanılır: mg/dL (Türkiye ve ABD de yaygın) ve mmol/L (Avrupa nın bir kısmında yaygın).</p>' },
             units: { 'mgdl': 1, 'mmoll': 18.0182 },
             faq: [ { q: '1 mmol/L kan şekeri kaç mg/dL ye eşittir?', a: '1 mmol/L glukoz, tıp standartlarında tam olarak 18.0182 mg/dL ye denktir.' } ]
+        },
+        {
+            id: 'ayakkabi_no', name: 'Ayakkabı Numarası', category: 'Günlük Yaşam', icon: 'footprints',
+            seo: { title: 'Ayakkabı Numarası Çevirici | Birimbaz', description: 'Avrupa, Amerika (Erkek/Kadın), İngiltere ve Santimetre cinsinden ayakkabı numarası dönüşümleri.', content: '<p>Dünyanın farklı bölgelerinde kullanılan ayakkabı kalıp ölçü standartlarının dönüşüm aracıdır.</p>' },
+            units: { 'cm': 'cm', 'eu': 'eu', 'us_men': 'us_men', 'us_women': 'us_women', 'uk': 'uk' },
+            customConvert: function(val, from, to) {
+                if (from === to) return val;
+                let cm = 0;
+                if (from === 'cm') cm = val;
+                else if (from === 'eu') cm = (val - 2) / 1.5;
+                else if (from === 'us_men') cm = ((val + 22) / 3) * 2.54;
+                else if (from === 'us_women') cm = ((val + 21) / 3) * 2.54;
+                else if (from === 'uk') cm = ((val + 23) / 3) * 2.54;
+
+                if (to === 'cm') return cm;
+                if (to === 'eu') return (cm * 1.5) + 2;
+                if (to === 'us_men') return (cm / 2.54) * 3 - 22;
+                if (to === 'us_women') return (cm / 2.54) * 3 - 21;
+                if (to === 'uk') return (cm / 2.54) * 3 - 23;
+            },
+            faq: [ { q: 'Türkiye ve Avrupa ayakkabı ölçüleri aynı mıdır?', a: 'Evet, Türkiye de standart Avrupa (EU) ayakkabı numaralandırma sistemi kullanılmaktadır.' } ]
+        },
+        {
+            id: 'yuzuk_olcusu', name: 'Yüzük Ölçüsü', category: 'Günlük Yaşam', icon: 'circle',
+            seo: { title: 'Yüzük Ölçüsü Çevirici | Çap ve Çevre | Birimbaz', description: 'Yüzük iç çapı, çevre ölçüsü (TR/EU), US ve Japonya yüzük ölçülerini çevirin.', content: '<p>Parmak çevresi ölçülerek Türkiye, Amerika ve Asya ülkelerindeki en uygun yüzük bedeni belirlenebilir.</p>' },
+            units: { 'cevre': 'cevre', 'cap': 'cap', 'us': 'us', 'jp': 'jp' },
+            customConvert: function(val, from, to) {
+                if (from === to) return val;
+                let cevre = 0;
+                if (from === 'cevre') cevre = val;
+                else if (from === 'cap') cevre = val * Math.PI;
+                else if (from === 'us') cevre = val * 2.55 + 36.5;
+                else if (from === 'jp') cevre = val + 37;
+
+                if (to === 'cevre') return cevre;
+                if (to === 'cap') return cevre / Math.PI;
+                if (to === 'us') return (cevre - 36.5) / 2.55;
+                if (to === 'jp') return cevre - 37;
+            },
+            faq: [ { q: 'Türkiye de yüzük ölçüsü hangi standarda dayanır?', a: 'Türkiye ve Avrupa daki yüzük ölçüsü genellikle milimetre cinsinden parmak çevre uzunluğunu (EU standardı) gösterir.' } ]
         }
     ];
 
@@ -382,7 +483,19 @@
         'Hz': 'Hertz', 'kHz': 'Kilohertz', 'MHz': 'Megahertz', 'GHz': 'Gigahertz',
         'USD': 'Amerikan Doları (USD)', 'EUR': 'Euro (EUR)', 'TRY': 'Türk Lirası (TRY)', 'GBP': 'İngiliz Sterlini (GBP)', 'JPY': 'Japon Yeni (JPY)',
         'BTC': 'Bitcoin (BTC)', 'ETH': 'Ethereum (ETH)', 'USDT': 'Tether (USDT)', 'BNB': 'Binance Coin (BNB)', 'SOL': 'Solana (SOL)',
-        'km/l': 'Kilometre / Litre', 'l/100km': 'Litre / 100 km', 'mpg': 'Mil / Galon (US)'
+        'km/l': 'Kilometre / Litre', 'l/100km': 'Litre / 100 km', 'mpg': 'Mil / Galon (US)',
+        'kg_m3': 'Kilogram/Metreküp (kg/m³)', 'g_cm3': 'Gram/Santimetreküp (g/cm³)', 'lb_ft3': 'Pound/Ayakküp (lb/ft³)', 'lb_in3': 'Pound/İnçküp (lb/in³)',
+        'Sv': 'Sievert (Sv)', 'mSv': 'Milisievert (mSv)', 'uSv': 'Mikrosievert (µSv)', 'rem': 'Rem', 'mrem': 'Milirem', 'rad': 'Rad',
+        'A': 'Amper (A)', 'mA': 'Miliamper (mA)', 'uA': 'Mikroamper (µA)', 'kA': 'Kiloamper (kA)',
+        'ohm': 'Ohm (Ω)', 'kohm': 'Kiloohm (kΩ)', 'Mohm': 'Megaohm (MΩ)', 'mohm': 'Miliohm (mΩ)',
+        'm3_s': 'Metreküp/Saniye (m³/s)', 'm3_h': 'Metreküp/Saat (m³/h)', 'L_min': 'Litre/Dakika (L/dk)', 'L_s': 'Litre/Saniye (L/s)', 'gpm': 'Galon/Dakika (gpm)',
+        'rad_s': 'Radyan/Saniye (rad/s)', 'deg_s': 'Derece/Saniye (°/s)', 'rpm': 'RPM (Devir/Dakika)',
+        'm_s2': 'Metre/Saniyekare (m/s²)', 'km_h2': 'Kilometre/Saatkare (km/h²)', 'g': 'G-Kuvveti (Yerçekimi)', 'ft_s2': 'Ayak/Saniyekare (ft/s²)',
+        'Pa_s': 'Pascal-saniye (Pa·s)', 'P': 'Poise (P)', 'cP': 'Centipoise (cP)', 'lb_s_ft2': 'Pound-saniye/Ayakkare',
+        'J_kgK': 'Joule/kg·K (J/kg·K)', 'kJ_kgK': 'Kilojoule/kg·K (kJ/kg·K)', 'cal_gC': 'Kalori/g·°C (cal/g·°C)', 'BTU_lbF': 'BTU/lb·°F',
+        'px': 'Piksel (px)', 'pt': 'Punto (pt)', 'em': 'Em (em)', 'in': 'İnç (in)', 'mm': 'Milimetre (mm)',
+        'cm': 'Santimetre (cm)', 'eu': 'Avrupa (EU)', 'us_men': 'ABD Erkek (US)', 'us_women': 'ABD Kadın (US)', 'uk': 'İngiltere (UK)',
+        'cevre': 'Çevre (TR/EU Ölçüsü)', 'cap': 'İç Çap (mm)', 'us': 'ABD Ölçüsü (US)', 'jp': 'Japon Ölçüsü (JP)'
     };
 
     const app = createApp({
@@ -492,6 +605,7 @@
             async fetchCurrency() {
                 this.apiLoading = true; this.apiError = false;
                 try {
+                    // exchange-rate api: Son derece kararlı ve yüksek limitli public API
                     const res = await fetch('https://open.er-api.com/v6/latest/USD');
                     if(!res.ok) throw new Error("API Error");
                     const data = await res.json();
@@ -507,17 +621,25 @@
             async fetchCrypto() {
                 this.apiLoading = true; this.apiError = false;
                 try {
-                    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,solana&vs_currencies=usd');
+                    // CoinCap Assets API: CoinGecko'ya kıyasla sıfır rate-limit sorunu çıkaran, en kararlı keyless API.
+                    const res = await fetch('https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,tether,binance-coin,solana');
                     if(!res.ok) throw new Error("API Error");
-                    const data = await res.json();
+                    const json = await res.json();
+                    const data = json.data;
+                    const btc = data.find(d => d.id === 'bitcoin')?.priceUsd;
+                    const eth = data.find(d => d.id === 'ethereum')?.priceUsd;
+                    const usdt = data.find(d => d.id === 'tether')?.priceUsd;
+                    const bnb = data.find(d => d.id === 'binance-coin')?.priceUsd;
+                    const sol = data.find(d => d.id === 'solana')?.priceUsd;
+
                     const toolObj = this.tools.find(t => t.id === 'kripto');
                     toolObj.units = {
                         'USD': 1,
-                        'BTC': data.bitcoin?.usd || toolObj.units['BTC'], 
-                        'ETH': data.ethereum?.usd || toolObj.units['ETH'],
-                        'USDT': data.tether?.usd || toolObj.units['USDT'],
-                        'BNB': data.binancecoin?.usd || toolObj.units['BNB'],
-                        'SOL': data.solana?.usd || toolObj.units['SOL']
+                        'BTC': btc ? parseFloat(btc) : toolObj.units['BTC'], 
+                        'ETH': eth ? parseFloat(eth) : toolObj.units['ETH'],
+                        'USDT': usdt ? parseFloat(usdt) : toolObj.units['USDT'],
+                        'BNB': bnb ? parseFloat(bnb) : toolObj.units['BNB'],
+                        'SOL': sol ? parseFloat(sol) : toolObj.units['SOL']
                     };
                     this.calcToValue();
                 } catch(e) { this.apiError = true; this.calcToValue(); } 
@@ -546,3 +668,5 @@
 </script>
 </body>
 </html>
+
+
